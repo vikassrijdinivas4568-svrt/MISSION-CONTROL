@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!-- ═══════════════════════════════════════════════
+       CHARACTER ENCODING & VIEWPORT
+  ═══════════════════════════════════════════════ -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <!-- ═══════════════════════════════════════════════
+       PRIMARY META TAGS (SEO)
+  ═══════════════════════════════════════════════ -->
+  <title>Mission Control — Deep Space Operations Center</title>
+  <meta name="title"       content="Mission Control — Deep Space Operations Center">
+  <meta name="description" content="A real-time deep space mission operations dashboard featuring live telemetry, proximity radar, mission task board, and command terminal.">
+  <meta name="keywords"    content="mission control, dashboard, space, telemetry, operations, real-time">
+  <meta name="author"      content="Mission Control OPS">
+  <meta name="robots"      content="index, follow">
+  <meta name="theme-color" content="#020c0e">
+
+  <!-- ═══════════════════════════════════════════════
+       OPEN GRAPH / SOCIAL SHARING
+  ═══════════════════════════════════════════════ -->
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://yourusername.github.io/mission-control/">
+  <meta property="og:title"       content="Mission Control — Deep Space Operations Center">
+  <meta property="og:description" content="Real-time deep space mission operations dashboard with live telemetry, radar, task board, and command terminal.">
+  <meta property="og:image"       content="https://yourusername.github.io/mission-control/og-image.png">
+
+  <!-- ═══════════════════════════════════════════════
+       TWITTER CARD
+  ═══════════════════════════════════════════════ -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:url"         content="https://yourusername.github.io/mission-control/">
+  <meta name="twitter:title"       content="Mission Control — Deep Space Operations Center">
+  <meta name="twitter:description" content="Real-time deep space mission operations dashboard.">
+  <meta name="twitter:image"       content="https://yourusername.github.io/mission-control/og-image.png">
+
+  <!-- ═══════════════════════════════════════════════
+       FAVICON (inline SVG data URI — no extra files needed)
+  ═══════════════════════════════════════════════ -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23020c0e'/><circle cx='16' cy='16' r='10' fill='none' stroke='%2300d4e8' stroke-width='1.5'/><circle cx='16' cy='16' r='6' fill='none' stroke='%2300d4e8' stroke-width='1'/><circle cx='16' cy='16' r='2' fill='%2300d4e8'/><line x1='16' y1='6' x2='16' y2='26' stroke='%2300d4e8' stroke-width='0.75' opacity='0.4'/><line x1='6' y1='16' x2='26' y2='16' stroke='%2300d4e8' stroke-width='0.75' opacity='0.4'/></svg>">
+  <link rel="apple-touch-icon"     href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' rx='40' fill='%23020c0e'/><circle cx='90' cy='90' r='60' fill='none' stroke='%2300d4e8' stroke-width='6'/><circle cx='90' cy='90' r='12' fill='%2300d4e8'/></svg>">
+
+  <!-- ═══════════════════════════════════════════════
+       CANONICAL URL
+  ═══════════════════════════════════════════════ -->
+  <link rel="canonical" href="https://yourusername.github.io/mission-control/">
+
+  <!-- ═══════════════════════════════════════════════
+       PRECONNECT (performance — fonts loaded faster)
+  ═══════════════════════════════════════════════ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- ═══════════════════════════════════════════════
+       FONTS
+  ═══════════════════════════════════════════════ -->
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+
+  <!-- ═══════════════════════════════════════════════
+       STRUCTURED DATA (JSON-LD for SEO)
+  ═══════════════════════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Mission Control — Deep Space Operations Center",
+    "description": "A real-time deep space mission operations dashboard featuring live telemetry, proximity radar, mission task board, and command terminal.",
+    "applicationCategory": "Dashboard",
+    "operatingSystem": "Any",
+    "url": "https://yourusername.github.io/mission-control/",
+    "author": {
+      "@type": "Organization",
+      "name": "Mission Control OPS"
+    }
+  }
+  </script>
+
+  <!-- ═══════════════════════════════════════════════
+       CRITICAL CSS — prevents FOUC (flash of unstyled content)
+  ═══════════════════════════════════════════════ -->
+  <style>
+    html { background: #020c0e; }
+    body { visibility: hidden; }
+    body.loaded { visibility: visible; }
+  </style>
+
+  <!-- ═══════════════════════════════════════════════
+       MAIN STYLES
+  ═══════════════════════════════════════════════ -->
+  <style>
+    /* ── RESET & ROOT ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #020c0e;
+      --panel:   #040f12;
+      --border:  #0d3a42;
+      --glow:    #00d4e8;
+      --glow2:   #00ff9d;
+      --glow3:   #ff4d6d;
+      --glow4:   #ffd166;
+      --text:    #a8d8e0;
+      --muted:   #2e6b76;
+      --mono:    'Share Tech Mono', monospace;
+      --display: 'Orbitron', sans-serif;
+      --sidebar: 220px;
+      --right:   280px;
+      --header:  56px;
+    }
+
+    /* ── BASE ── */
+    html { height: 100%; scroll-behavior: smooth; }
+
+    body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--mono);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      transition: visibility 0s;
+    }
+
+    /* ── ACCESSIBILITY: skip nav ── */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 1rem;
+      background: var(--glow);
+      color: var(--bg);
+      padding: 0.5rem 1rem;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      font-weight: bold;
+      z-index: 99999;
+      border-radius: 0 0 4px 4px;
+      text-decoration: none;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* ── SCREEN-READER ONLY ── */
+    .sr-only {
+      position: absolute;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* ── SCANLINE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px, transparent 3px,
+        rgba(0,0,0,0.06) 3px, rgba(0,0,0,0.06) 4px
+      );
+      pointer-events: none;
+      z-index: 9999;
+      will-change: opacity;
+    }
+
+    /* ── PAGE LOAD ANIMATION ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .animate-in {
+      opacity: 0;
+      animation: fadeUp 0.5s ease forwards;
+    }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+
+    /* ═══════════════════════════════════
+       LAYOUT
+    ═══════════════════════════════════ */
+    .app {
+      display: grid;
+      grid-template-rows: var(--header) 1fr auto;
+      grid-template-columns: var(--sidebar) 1fr var(--right);
+      grid-template-areas:
+        "header  header  header"
+        "left    center  right"
+        "footer  footer  footer";
+      min-height: 100vh;
+      gap: 1px;
+      background: var(--border);
+    }
+
+    /* ═══════════════════════════════════
+       HEADER / NAV
+    ═══════════════════════════════════ */
+    .site-header {
+      grid-area: header;
+      background: var(--panel);
+      display: flex;
+      align-items: center;
+      padding: 0 1.5rem;
+      gap: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .site-header::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--glow), transparent);
+      animation: scanH 3s linear infinite;
+    }
+    @keyframes scanH { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+
+    .logo {
+      font-family: var(--display);
+      font-weight: 900;
+      font-size: clamp(0.75rem, 2vw, 1rem);
+      color: var(--glow);
+      letter-spacing: 0.15em;
+      text-shadow: 0 0 20px var(--glow);
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    /* Primary Nav */
+    .primary-nav { display: flex; gap: 0.25rem; }
+
+    .nav-link {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 0.3rem 0.7rem;
+      border: 1px solid transparent;
+      border-radius: 3px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .nav-link:hover,
+    .nav-link[aria-current="page"] { color: var(--glow); border-color: var(--border); }
+
+    .header-status {
+      display: flex;
+      gap: 1.2rem;
+      font-size: 0.65rem;
+      color: var(--muted);
+      margin-left: auto;
+    }
+
+    .status-item { display: flex; align-items: center; gap: 0.35rem; }
+
+    .status-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      animation: blink 2s ease-in-out infinite;
+    }
+    .dot-ok   { background: var(--glow2); box-shadow: 0 0 6px var(--glow2); }
+    .dot-warn { background: var(--glow4); box-shadow: 0 0 6px var(--glow4); animation-delay: 0.5s; }
+    .dot-err  { background: var(--glow3); box-shadow: 0 0 6px var(--glow3); animation-delay: 1s; }
+    @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+
+    #clock {
+      font-family: var(--display);
+      font-size: 0.8rem;
+      color: var(--glow);
+      letter-spacing: 0.1em;
+      text-shadow: 0 0 10px var(--glow);
+      white-space: nowrap;
+    }
+
+    /* Mobile hamburger */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--glow);
+      font-size: 1rem;
+      padding: 0.3rem 0.6rem;
+      border-radius: 3px;
+      cursor: pointer;
+      margin-left: auto;
+      font-family: var(--mono);
+    }
+
+    /* ═══════════════════════════════════
+       PANEL BASE
+    ═══════════════════════════════════ */
+    .panel {
+      background: var(--panel);
+      padding: 1rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .panel-title {
+      font-family: var(--display);
+      font-size: 0.58rem;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .panel-title::before {
+      content: '';
+      width: 3px; height: 12px;
+      background: var(--glow);
+      box-shadow: 0 0 8px var(--glow);
+      border-radius: 1px;
+      flex-shrink: 0;
+    }
+
+    /* ═══════════════════════════════════
+       LEFT COLUMN
+    ═══════════════════════════════════ */
+    .left-col {
+      grid-area: left;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border);
+    }
+
+    /* RADAR */
+    .radar-wrap { background: var(--panel); padding: 1rem; flex-shrink: 0; }
+
+    .radar-container {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1;
+      max-width: 180px;
+      margin: 0 auto;
+    }
+
+    .radar-canvas { width: 100%; height: 100%; border-radius: 50%; }
+
+    .radar-sweep {
+      position: absolute; inset: 0;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, transparent 0deg, rgba(0,212,232,0.15) 30deg, rgba(0,212,232,0.4) 60deg, transparent 60deg);
+      animation: sweep 4s linear infinite;
+    }
+    @keyframes sweep { to { transform: rotate(360deg); } }
+
+    .radar-ping {
+      position: absolute;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      animation: ping-fade 4s ease-out infinite;
+    }
+    @keyframes ping-fade {
+      0%   { opacity: 0; transform: translate(-50%,-50%) scale(0); }
+      20%  { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+      100% { opacity: 0; transform: translate(-50%,-50%) scale(1); }
+    }
+
+    /* SYSTEM STATUS */
+    .sys-list { display: flex; flex-direction: column; gap: 0.5rem; }
+
+    .sys-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      padding: 0.4rem 0.5rem;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .sys-item:hover { border-color: var(--glow); background: rgba(0,212,232,0.04); }
+    .sys-item:focus-visible { outline: 2px solid var(--glow); outline-offset: 2px; }
+
+    .sys-name { flex: 1; color: var(--text); }
+    .sys-val  { font-size: 0.65rem; color: var(--muted); min-width: 2.5rem; text-align: right; }
+
+    .bar-wrap  { width: 48px; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+    .bar-fill  { height: 100%; border-radius: 2px; transition: width 0.8s ease; }
+
+    /* ═══════════════════════════════════
+       CENTER COLUMN
+    ═══════════════════════════════════ */
+    .center-col {
+      grid-area: center;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border);
+    }
+
+    /* TELEMETRY */
+    .chart-panel { flex-shrink: 0; background: var(--panel); padding: 1rem; }
+
+    .chart-area { position: relative; height: 100px; margin-top: 0.5rem; }
+    .chart-area canvas { width: 100%; height: 100%; }
+
+    .chart-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.6rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+
+    .chart-legend {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.62rem;
+      margin-bottom: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .legend-item { display: flex; align-items: center; gap: 0.3rem; }
+    .legend-line { width: 16px; height: 2px; border-radius: 1px; }
+
+    /* KANBAN */
+    .kanban-panel { flex: 1; background: var(--panel); padding: 1rem; overflow: hidden; }
+
+    .kanban-board {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      height: calc(100% - 2rem);
+    }
+
+    .kanban-col { display: flex; flex-direction: column; gap: 0.5rem; overflow: hidden; }
+
+    .kanban-col-title {
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
+      padding: 0.3rem 0.5rem;
+      border-radius: 2px;
+      text-align: center;
+      font-family: var(--display);
+      margin-bottom: 0.25rem;
+    }
+    .col-queue  .kanban-col-title { background: rgba(0,212,232,0.1);   color: var(--glow);  }
+    .col-active .kanban-col-title { background: rgba(255,209,102,0.1); color: var(--glow4); }
+    .col-done   .kanban-col-title { background: rgba(0,255,157,0.1);   color: var(--glow2); }
+
+    .kanban-cards { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 0.4rem; }
+    .kanban-cards::-webkit-scrollbar { width: 3px; }
+    .kanban-cards::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+    .task-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.55rem 0.6rem;
+      font-size: 0.68rem;
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+      animation: slideIn 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    @keyframes slideIn { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:translateY(0); } }
+
+    .task-card:hover { border-color: var(--glow); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,212,232,0.1); }
+    .task-card:focus-visible { outline: 2px solid var(--glow); outline-offset: 2px; }
+
+    .task-card::before { content: ''; position: absolute; left:0; top:0; bottom:0; width: 2px; }
+    .pri-high .task-card::before { background: var(--glow3); }
+    .pri-med  .task-card::before { background: var(--glow4); }
+    .pri-low  .task-card::before { background: var(--glow2); }
+
+    .task-id    { font-size: 0.58rem; color: var(--muted); margin-bottom: 0.2rem; }
+    .task-title { color: var(--text); margin-bottom: 0.35rem; line-height: 1.3; }
+    .task-meta  { display: flex; justify-content: space-between; align-items: center; gap: 0.25rem; }
+
+    .task-tag {
+      font-size: 0.56rem; padding: 1px 5px;
+      border-radius: 2px; letter-spacing: 0.05em;
+    }
+    .tag-nav { background: rgba(0,212,232,0.15);   color: var(--glow);  }
+    .tag-eng { background: rgba(255,209,102,0.15); color: var(--glow4); }
+    .tag-bio { background: rgba(0,255,157,0.15);   color: var(--glow2); }
+    .tag-sec { background: rgba(255,77,109,0.15);  color: var(--glow3); }
+
+    .task-move {
+      font-size: 0.58rem; color: var(--muted);
+      background: none; border: 1px solid var(--border);
+      padding: 1px 5px; border-radius: 2px;
+      cursor: pointer; font-family: var(--mono);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .task-move:hover { border-color: var(--glow); color: var(--glow); }
+    .task-move:focus-visible { outline: 2px solid var(--glow); outline-offset: 2px; }
+
+    .add-task-btn {
+      width: 100%; background: transparent;
+      border: 1px dashed var(--border); color: var(--muted);
+      font-family: var(--mono); font-size: 0.65rem;
+      padding: 0.35rem; border-radius: 3px;
+      cursor: pointer; margin-top: 0.25rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .add-task-btn:hover { border-color: var(--glow); color: var(--glow); }
+    .add-task-btn:focus-visible { outline: 2px solid var(--glow); outline-offset: 2px; }
+
+    /* ═══════════════════════════════════
+       RIGHT COLUMN
+    ═══════════════════════════════════ */
+    .right-col {
+      grid-area: right;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border);
+    }
+
+    /* METRICS */
+    .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+
+    .metric-card {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 4px; padding: 0.6rem;
+      text-align: center; transition: border-color 0.2s;
+      cursor: default;
+    }
+    .metric-card:hover { border-color: var(--glow); }
+
+    .metric-val {
+      font-family: var(--display);
+      font-size: clamp(1rem, 3vw, 1.3rem);
+      font-weight: 700; line-height: 1; margin-bottom: 0.2rem;
+    }
+    .metric-label { font-size: 0.55rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+    .metric-delta { font-size: 0.58rem; margin-top: 0.2rem; }
+
+    /* ALERTS */
+    .alerts-panel { flex: 1; background: var(--panel); padding: 1rem; overflow: hidden; display: flex; flex-direction: column; }
+
+    .alert-list { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 0.4rem; }
+    .alert-list::-webkit-scrollbar { width: 3px; }
+    .alert-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+    .alert-item {
+      display: flex; gap: 0.6rem;
+      padding: 0.5rem 0.6rem; border-radius: 4px;
+      border: 1px solid transparent; font-size: 0.68rem;
+      animation: alertIn 0.4s ease; cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    @keyframes alertIn { from { opacity:0; transform:translateX(8px); } to { opacity:1; transform:translateX(0); } }
+
+    .alert-item:hover { opacity: 0.75; }
+    .alert-item.dismissed { opacity: 0.2; text-decoration: line-through; }
+    .alert-crit { background: rgba(255,77,109,0.08);  border-color: rgba(255,77,109,0.3);  }
+    .alert-warn { background: rgba(255,209,102,0.06); border-color: rgba(255,209,102,0.2); }
+    .alert-info { background: rgba(0,212,232,0.05);   border-color: rgba(0,212,232,0.15);  }
+    .alert-ok   { background: rgba(0,255,157,0.05);   border-color: rgba(0,255,157,0.15);  }
+
+    .alert-icon  { font-size: 0.8rem; flex-shrink: 0; margin-top: 1px; }
+    .alert-body  { flex: 1; min-width: 0; }
+    .alert-title { color: var(--text); margin-bottom: 0.1rem; word-break: break-word; }
+    .alert-time  { font-size: 0.58rem; color: var(--muted); }
+
+    /* TERMINAL */
+    .terminal-panel { background: var(--panel); padding: 1rem; flex-shrink: 0; }
+
+    .terminal-output {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 4px; padding: 0.5rem 0.75rem;
+      height: 72px; overflow-y: auto;
+      font-size: 0.66rem; line-height: 1.7; margin-bottom: 0.5rem;
+    }
+    .terminal-output::-webkit-scrollbar { width: 3px; }
+    .terminal-output::-webkit-scrollbar-thumb { background: var(--border); }
+
+    .t-line { display: block; animation: tFade 0.3s; }
+    @keyframes tFade { from { opacity:0; } to { opacity:1; } }
+    .t-ok  { color: var(--glow2); }
+    .t-err { color: var(--glow3); }
+    .t-sys { color: var(--muted); }
+    .t-cmd { color: var(--glow);  }
+
+    .terminal-input-row { display: flex; align-items: center; gap: 0.4rem; font-size: 0.7rem; }
+    .terminal-prompt { color: var(--glow); }
+
+    .terminal-input {
+      flex: 1; background: transparent;
+      border: none; border-bottom: 1px solid var(--border);
+      color: var(--text); font-family: var(--mono); font-size: 0.7rem;
+      padding: 0.1rem 0.2rem; outline: none;
+      caret-color: var(--glow);
+    }
+    .terminal-input:focus { border-color: var(--glow); }
+
+    /* ═══════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════ */
+    .site-footer {
+      grid-area: footer;
+      background: var(--panel);
+      border-top: 1px solid var(--border);
+      padding: 0.6rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      font-size: 0.6rem;
+      color: var(--muted);
+    }
+
+    .footer-links { display: flex; gap: 1rem; }
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--glow); }
+    .footer-links a:focus-visible { outline: 2px solid var(--glow); outline-offset: 2px; border-radius: 2px; }
+
+    /* ═══════════════════════════════════
+       MODAL
+    ═══════════════════════════════════ */
+    .modal-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(2,12,14,0.88);
+      z-index: 1000;
+      align-items: center; justify-content: center;
+      backdrop-filter: blur(3px);
+    }
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: var(--panel);
+      border: 1px solid var(--glow);
+      border-radius: 6px;
+      padding: 1.5rem;
+      width: min(320px, 90vw);
+      box-shadow: 0 0 40px rgba(0,212,232,0.15);
+      animation: modalIn 0.2s ease;
+    }
+    @keyframes modalIn { from { opacity:0; transform:scale(0.95); } to { opacity:1; transform:scale(1); } }
+
+    .modal h2 {
+      font-family: var(--display);
+      font-size: 0.72rem;
+      color: var(--glow);
+      letter-spacing: 0.15em;
+      margin-bottom: 1rem;
+    }
+
+    .modal-field { margin-bottom: 0.75rem; }
+    .modal-field label { display: block; font-size: 0.62rem; color: var(--muted); margin-bottom: 0.3rem; letter-spacing: 0.1em; }
+
+    .modal-field input,
+    .modal-field select {
+      width: 100%; background: var(--bg);
+      border: 1px solid var(--border); color: var(--text);
+      font-family: var(--mono); font-size: 0.72rem;
+      padding: 0.4rem 0.6rem; border-radius: 3px; outline: none;
+    }
+    .modal-field input:focus,
+    .modal-field select:focus { border-color: var(--glow); }
+    .modal-field select option { background: var(--bg); }
+
+    .modal-btns { display: flex; gap: 0.5rem; justify-content: flex-end; margin-top: 1rem; }
+
+    .btn {
+      font-family: var(--mono); font-size: 0.68rem;
+      padding: 0.4rem 0.9rem; border-radius: 3px;
+      border: 1px solid; cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      letter-spacing: 0.05em;
+    }
+    .btn:focus-visible { outline: 2px solid var(--glow); outline-offset: 2px; }
+    .btn-primary { background: var(--glow); border-color: var(--glow); color: var(--bg); }
+    .btn-primary:hover { background: transparent; color: var(--glow); }
+    .btn-ghost { background: transparent; border-color: var(--border); color: var(--muted); }
+    .btn-ghost:hover { border-color: var(--glow); color: var(--glow); }
+
+    /* ═══════════════════════════════════
+       RESPONSIVE — TABLET
+    ═══════════════════════════════════ */
+    @media (max-width: 1024px) {
+      :root { --sidebar: 180px; --right: 240px; }
+    }
+
+    @media (max-width: 768px) {
+      .app {
+        grid-template-columns: 1fr;
+        grid-template-rows: var(--header) auto auto auto auto;
+        grid-template-areas:
+          "header"
+          "left"
+          "center"
+          "right"
+          "footer";
+      }
+
+      .left-col, .center-col, .right-col {
+        background: transparent;
+        gap: 1px;
+      }
+
+      .kanban-board { grid-template-columns: 1fr; height: auto; }
+      .kanban-cards { max-height: 200px; }
+
+      .header-status { display: none; }
+      .primary-nav   { display: none; }
+      .primary-nav.open { display: flex; flex-direction: column; position: absolute; top: var(--header); left: 0; right: 0; background: var(--panel); border-bottom: 1px solid var(--border); padding: 0.5rem; z-index: 100; }
+      .menu-toggle   { display: block; }
+
+      .metrics-grid { grid-template-columns: repeat(4,1fr); }
+    }
+
+    @media (max-width: 480px) {
+      .metrics-grid { grid-template-columns: 1fr 1fr; }
+      .site-footer  { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* ═══════════════════════════════════
+       REDUCED MOTION
+    ═══════════════════════════════════ */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ═══════════════════════════════════
+       PRINT
+    ═══════════════════════════════════ */
+    @media print {
+      body::before, .radar-sweep, .site-header::after { display: none; }
+      .app { display: block; }
+      .panel { break-inside: avoid; border: 1px solid #ccc; margin-bottom: 1rem; }
+      * { color: #000 !important; background: #fff !important; }
+    }
+
+    /* ═══════════════════════════════════
+       FOCUS VISIBLE GLOBAL
+    ═══════════════════════════════════ */
+    :focus-visible { outline: 2px solid var(--glow); outline-offset: 3px; }
+    :focus:not(:focus-visible) { outline: none; }
+  </style>
+</head>
+
+<body>
+  <!-- ── ACCESSIBILITY: Skip to main content ── -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- ═══════════════════════════════════
+       SEMANTIC PAGE STRUCTURE
+  ═══════════════════════════════════ -->
+  <div class="app" role="application" aria-label="Mission Control Operations Center">
+
+    <!-- HEADER / NAV -->
+    <header class="site-header animate-in" role="banner">
+      <a href="#main-content" class="logo" aria-label="Mission Control Home">◈ MISSION CONTROL</a>
+
+      <button class="menu-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation" onclick="toggleNav(this)">☰</button>
+
+      <nav class="primary-nav" id="primary-nav" role="navigation" aria-label="Primary navigation">
+        <a class="nav-link" href="#telemetry"  aria-current="page">TELEMETRY</a>
+        <a class="nav-link" href="#tasks">TASKS</a>
+        <a class="nav-link" href="#alerts">ALERTS</a>
+        <a class="nav-link" href="#terminal">COMMS</a>
+      </nav>
+
+      <div class="header-status" role="status" aria-live="polite" aria-label="System status">
+        <div class="status-item"><span class="status-dot dot-ok"   role="img" aria-label="Operational"></span>TELEMETRY</div>
+        <div class="status-item"><span class="status-dot dot-ok"   role="img" aria-label="Operational"></span>COMMS</div>
+        <div class="status-item"><span class="status-dot dot-warn" role="img" aria-label="Degraded"></span>SECTOR-7</div>
+        <div class="status-item"><span class="status-dot dot-err"  role="img" aria-label="Alert"></span>3 ALERTS</div>
+      </div>
+
+      <time id="clock" datetime="" aria-label="Current UTC time" aria-live="off">——:——:——</time>
+    </header>
+
+    <!-- LEFT COLUMN -->
+    <aside class="left-col animate-in delay-1" aria-label="Radar and systems status">
+
+      <!-- RADAR -->
+      <section class="radar-wrap" aria-labelledby="radar-title">
+        <h2 class="panel-title" id="radar-title">PROXIMITY RADAR</h2>
+        <div class="radar-container" role="img" aria-label="Proximity radar showing 3 contacts">
+          <canvas class="radar-canvas" id="radarCanvas" width="180" height="180" aria-hidden="true"></canvas>
+          <div class="radar-sweep" aria-hidden="true"></div>
+          <div class="radar-ping" aria-hidden="true" style="left:62%;top:30%;background:var(--glow);box-shadow:0 0 8px var(--glow);animation-delay:0.8s"></div>
+          <div class="radar-ping" aria-hidden="true" style="left:35%;top:58%;background:var(--glow4);box-shadow:0 0 8px var(--glow4);animation-delay:2.1s"></div>
+          <div class="radar-ping" aria-hidden="true" style="left:75%;top:68%;background:var(--glow3);box-shadow:0 0 8px var(--glow3);animation-delay:3.5s"></div>
+        </div>
+      </section>
+
+      <!-- SYSTEMS -->
+      <section class="panel" style="flex:1" aria-labelledby="sys-title">
+        <h2 class="panel-title" id="sys-title">SYSTEMS STATUS</h2>
+        <div class="sys-list" id="sysList" role="list" aria-label="System health indicators"></div>
+      </section>
+
+    </aside>
+
+    <!-- MAIN / CENTER -->
+    <main class="center-col animate-in delay-2" id="main-content" aria-label="Main dashboard">
+
+      <!-- TELEMETRY -->
+      <section class="chart-panel" id="telemetry" aria-labelledby="telem-title">
+        <h2 class="panel-title" id="telem-title">LIVE TELEMETRY</h2>
+        <div class="chart-legend" aria-hidden="true">
+          <div class="legend-item"><div class="legend-line" style="background:var(--glow)"></div><span style="color:var(--muted)">POWER</span></div>
+          <div class="legend-item"><div class="legend-line" style="background:var(--glow2)"></div><span style="color:var(--muted)">SHIELDS</span></div>
+          <div class="legend-item"><div class="legend-line" style="background:var(--glow4)"></div><span style="color:var(--muted)">COMMS</span></div>
+        </div>
+        <div class="chart-area">
+          <canvas id="telemetryChart" width="600" height="100" role="img" aria-label="Live telemetry chart showing power, shields, and comms data"></canvas>
+        </div>
+        <div class="chart-labels" aria-hidden="true" id="chartLabels"></div>
+      </section>
+
+      <!-- KANBAN -->
+      <section class="kanban-panel" id="tasks" aria-labelledby="kanban-title">
+        <h2 class="panel-title" id="kanban-title">MISSION TASK BOARD</h2>
+        <div class="kanban-board" role="region" aria-label="Mission tasks kanban board">
+          <div class="kanban-col col-queue"  role="region" aria-labelledby="col-label-0">
+            <h3 class="kanban-col-title" id="col-label-0">QUEUED</h3>
+            <div class="kanban-cards" id="cards-0" role="list"></div>
+            <button class="add-task-btn" onclick="openModal(0)" aria-label="Add task to Queued column">+ ADD TASK</button>
+          </div>
+          <div class="kanban-col col-active" role="region" aria-labelledby="col-label-1">
+            <h3 class="kanban-col-title" id="col-label-1">IN PROGRESS</h3>
+            <div class="kanban-cards" id="cards-1" role="list"></div>
+            <button class="add-task-btn" onclick="openModal(1)" aria-label="Add task to In Progress column">+ ADD TASK</button>
+          </div>
+          <div class="kanban-col col-done"   role="region" aria-labelledby="col-label-2">
+            <h3 class="kanban-col-title" id="col-label-2">COMPLETE</h3>
+            <div class="kanban-cards" id="cards-2" role="list"></div>
+            <button class="add-task-btn" onclick="openModal(2)" aria-label="Add task to Complete column">+ ADD TASK</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- RIGHT SIDEBAR -->
+    <aside class="right-col animate-in delay-3" aria-label="Metrics, alerts, and terminal">
+
+      <!-- METRICS -->
+      <section class="panel" aria-labelledby="metrics-title">
+        <h2 class="panel-title" id="metrics-title">KEY METRICS</h2>
+        <div class="metrics-grid" id="metricsGrid" role="list" aria-label="Key mission metrics"></div>
+      </section>
+
+      <!-- ALERTS -->
+      <section class="alerts-panel" id="alerts" aria-labelledby="alerts-title">
+        <h2 class="panel-title" id="alerts-title">
+          ALERT FEED
+          <span style="margin-left:auto;font-size:0.58rem;color:var(--muted)" id="alertCount" aria-live="polite"></span>
+        </h2>
+        <div class="alert-list" id="alertList" role="list" aria-label="Active system alerts" aria-live="polite"></div>
+      </section>
+
+      <!-- TERMINAL -->
+      <section class="terminal-panel" id="terminal" aria-labelledby="term-title">
+        <h2 class="panel-title" id="term-title">COMM TERMINAL</h2>
+        <div class="terminal-output" id="termOutput" role="log" aria-live="polite" aria-label="Command terminal output"></div>
+        <div class="terminal-input-row">
+          <span class="terminal-prompt" aria-hidden="true">OPS://&gt;</span>
+          <label for="termInput" class="sr-only">Enter command</label>
+          <input
+            class="terminal-input"
+            id="termInput"
+            type="text"
+            placeholder="type a command… (try 'help')"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+            aria-label="Command input"
+          >
+        </div>
+      </section>
+
+    </aside>
+
+    <!-- FOOTER -->
+    <footer class="site-footer animate-in delay-4" role="contentinfo">
+      <span>© <span id="footerYear"></span> MISSION CONTROL OPS — ALL SYSTEMS MONITORED</span>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="#main-content">TOP</a>
+        <a href="#telemetry">Telemetry</a>
+        <a href="#tasks">Tasks</a>
+        <a href="#alerts">Alerts</a>
+        <a href="#terminal">Comms</a>
+      </nav>
+      <span id="footerStatus" aria-live="polite"></span>
+    </footer>
+
+  </div><!-- /.app -->
+
+  <!-- ADD TASK MODAL -->
+  <div class="modal-overlay" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal">
+      <h2 id="modal-title">◈ NEW MISSION TASK</h2>
+      <div class="modal-field">
+        <label for="taskTitle">TASK TITLE</label>
+        <input type="text" id="taskTitle" placeholder="Describe the objective..." maxlength="80">
+      </div>
+      <div class="modal-field">
+        <label for="taskTag">DEPARTMENT</label>
+        <select id="taskTag">
+          <option value="nav">NAVIGATION</option>
+          <option value="eng">ENGINEERING</option>
+          <option value="bio">BIOMEDICAL</option>
+          <option value="sec">SECURITY</option>
+        </select>
+      </div>
+      <div class="modal-field">
+        <label for="taskPri">PRIORITY</label>
+        <select id="taskPri">
+          <option value="high">HIGH</option>
+          <option value="med">MEDIUM</option>
+          <option value="low">LOW</option>
+        </select>
+      </div>
+      <div class="modal-btns">
+        <button class="btn btn-ghost" onclick="closeModal()">CANCEL</button>
+        <button class="btn btn-primary" onclick="addTask()">DEPLOY TASK</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       JAVASCRIPT
+  ═══════════════════════════════════ -->
+  <script>
+    // ── Body reveal (prevents FOUC) ──
+    document.body.classList.add('loaded');
+    document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+    // ── Mobile nav toggle ──
+    function toggleNav(btn) {
+      const nav = document.getElementById('primary-nav');
+      const open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+    }
+
+    // ── UTC Clock ──
+    function updateClock() {
+      const now = new Date();
+      const ts  = now.toISOString().slice(11,19);
+      const el  = document.getElementById('clock');
+      el.textContent = 'UTC ' + ts;
+      el.setAttribute('datetime', now.toISOString());
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // ── Footer status ──
+    setInterval(() => {
+      document.getElementById('footerStatus').textContent =
+        'LAST SYNC: ' + new Date().toISOString().slice(11,19) + ' UTC';
+    }, 5000);
+
+    // ── RADAR ──
+    (function drawRadar() {
+      const c = document.getElementById('radarCanvas');
+      const ctx = c.getContext('2d');
+      const cx = c.width/2, cy = c.height/2, r = cx - 4;
+      ctx.clearRect(0, 0, c.width, c.height);
+      ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2);
+      ctx.strokeStyle='rgba(0,212,232,0.5)'; ctx.lineWidth=1.5; ctx.stroke();
+      [0.25,0.5,0.75,1].forEach(f => {
+        ctx.beginPath(); ctx.arc(cx,cy,r*f,0,Math.PI*2);
+        ctx.strokeStyle='rgba(0,212,232,0.1)'; ctx.lineWidth=1; ctx.stroke();
+      });
+      ctx.strokeStyle='rgba(0,212,232,0.1)'; ctx.lineWidth=1;
+      ctx.beginPath(); ctx.moveTo(cx,cy-r); ctx.lineTo(cx,cy+r); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx-r,cy); ctx.lineTo(cx+r,cy); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx,cy,3,0,Math.PI*2);
+      ctx.fillStyle='#00d4e8'; ctx.fill();
+    })();
+
+    // ── SYSTEMS ──
+    const systems = [
+      { name:'LIFE SUPPORT', val:98, color:'#00ff9d' },
+      { name:'PROPULSION',   val:74, color:'#ffd166' },
+      { name:'NAVIGATION',   val:91, color:'#00d4e8' },
+      { name:'SHIELDS',      val:43, color:'#ff4d6d' },
+      { name:'COMMS ARRAY',  val:87, color:'#00d4e8' },
+      { name:'POWER GRID',   val:66, color:'#ffd166' },
+    ];
+
+    function renderSystems() {
+      const list = document.getElementById('sysList');
+      list.innerHTML = '';
+      systems.forEach((s, i) => {
+        const item = document.createElement('div');
+        item.className = 'sys-item';
+        item.setAttribute('role', 'listitem');
+        item.setAttribute('tabindex', '0');
+        item.setAttribute('aria-label', `${s.name}: ${Math.round(s.val)}%`);
+        item.innerHTML = `
+          <span class="sys-name">${s.name}</span>
+          <div class="bar-wrap" aria-hidden="true"><div class="bar-fill" id="bar-${i}" style="width:${s.val}%;background:${s.color}"></div></div>
+          <span class="sys-val" id="sval-${i}">${Math.round(s.val)}%</span>`;
+        item.onclick = () => fluctuate(i);
+        item.onkeydown = e => { if(e.key==='Enter'||e.key===' ') fluctuate(i); };
+        list.appendChild(item);
+      });
+    }
+
+    function fluctuate(i) {
+      const delta = (Math.random() - 0.5) * 18;
+      systems[i].val = Math.max(5, Math.min(99, systems[i].val + delta));
+      const v = Math.round(systems[i].val);
+      document.getElementById(`bar-${i}`).style.width = v + '%';
+      document.getElementById(`sval-${i}`).textContent = v + '%';
+      document.querySelector(`.sys-item:nth-child(${i+1})`).setAttribute('aria-label', `${systems[i].name}: ${v}%`);
+      termLog(`SYS:${systems[i].name} → ${v}%`, v < 30 ? 'err' : v < 60 ? 'sys' : 'ok');
+    }
+    renderSystems();
+    setInterval(() => fluctuate(Math.floor(Math.random() * systems.length)), 3800);
+
+    // ── TELEMETRY CHART ──
+    const POINTS = 40;
+    const series = {
+      power:   { data:[], color:'#00d4e8' },
+      shields: { data:[], color:'#00ff9d' },
+      comms:   { data:[], color:'#ffd166' },
+    };
+    for(let i=0;i<POINTS;i++){
+      series.power.data.push(60+Math.random()*30);
+      series.shields.data.push(40+Math.random()*40);
+      series.comms.data.push(70+Math.random()*25);
+    }
+
+    function drawTelemetry() {
+      const canvas = document.getElementById('telemetryChart');
+      const ctx = canvas.getContext('2d');
+      const W = canvas.width, H = canvas.height;
+      ctx.clearRect(0,0,W,H);
+      ctx.strokeStyle='rgba(13,58,66,0.5)'; ctx.lineWidth=1;
+      for(let y=0;y<H;y+=H/4){ ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke(); }
+      Object.values(series).forEach(s => {
+        ctx.beginPath();
+        s.data.forEach((v,i) => {
+          const x=(i/(POINTS-1))*W, y=H-(v/100)*H;
+          i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+        });
+        ctx.strokeStyle=s.color; ctx.lineWidth=1.5;
+        ctx.shadowColor=s.color; ctx.shadowBlur=5; ctx.stroke(); ctx.shadowBlur=0;
+        ctx.lineTo(W,H); ctx.lineTo(0,H); ctx.closePath();
+        ctx.fillStyle=s.color+'18'; ctx.fill();
+      });
+
+      // time labels
+      const labels = document.getElementById('chartLabels');
+      if(labels.children.length===0){
+        for(let i=0;i<5;i++){
+          const span = document.createElement('span');
+          span.textContent = `T-${(4-i)*10}s`;
+          labels.appendChild(span);
+        }
+      }
+    }
+
+    function tickTelemetry(){
+      series.power.data.push(  Math.max(10,Math.min(98,series.power.data.at(-1)  +(Math.random()-.45)*8)));
+      series.shields.data.push(Math.max(10,Math.min(98,series.shields.data.at(-1)+(Math.random()-.48)*10)));
+      series.comms.data.push(  Math.max(10,Math.min(98,series.comms.data.at(-1) +(Math.random()-.46)*7)));
+      if(series.power.data.length>POINTS){
+        series.power.data.shift(); series.shields.data.shift(); series.comms.data.shift();
+      }
+      drawTelemetry();
+    }
+    drawTelemetry();
+    setInterval(tickTelemetry, 800);
+
+    // ── METRICS ──
+    const metrics = [
+      { id:'m-vel',  label:'VELOCITY',    val:2847, unit:'km/s', color:'#00d4e8', delta:'+1.2%', pos:true  },
+      { id:'m-alt',  label:'ALTITUDE',    val:384,  unit:'Mm',   color:'#00ff9d', delta:'-0.3%', pos:false },
+      { id:'m-crew', label:'CREW STATUS', val:7,    unit:'/7',   color:'#00ff9d', delta:'100%',  pos:true  },
+      { id:'m-fuel', label:'FUEL',        val:63,   unit:'%',    color:'#ffd166', delta:'-0.8%', pos:false },
+    ];
+
+    function renderMetrics(){
+      const grid = document.getElementById('metricsGrid');
+      grid.innerHTML = '';
+      metrics.forEach(m => {
+        const card = document.createElement('article');
+        card.className = 'metric-card';
+        card.setAttribute('role','listitem');
+        card.setAttribute('aria-label',`${m.label}: ${m.val}${m.unit}`);
+        card.innerHTML = `
+          <div class="metric-val" style="color:${m.color};text-shadow:0 0 12px ${m.color}">${m.val}<span style="font-size:0.45rem;color:var(--muted);margin-left:2px">${m.unit}</span></div>
+          <div class="metric-label">${m.label}</div>
+          <div class="metric-delta" style="color:${m.pos?'#00ff9d':'#ff4d6d'}">${m.delta}</div>`;
+        grid.appendChild(card);
+      });
+    }
+    renderMetrics();
+
+    // ── ALERTS ──
+    const alertsData = [
+      { type:'crit', icon:'⚠', title:'SHIELD INTEGRITY LOW — SECTOR 7',          time:'T+00:04:12' },
+      { type:'warn', icon:'◈', title:'Propulsion variance on thruster 3',          time:'T+00:12:47' },
+      { type:'info', icon:'◉', title:'Scheduled maintenance window in 2h 14m',     time:'T+00:18:03' },
+      { type:'ok',   icon:'✓', title:'Life support recalibration complete',         time:'T+00:22:55' },
+      { type:'warn', icon:'◈', title:'Solar wind spike — comms may degrade',        time:'T+00:31:09' },
+      { type:'crit', icon:'⚠', title:'Unidentified contact — proximity +340km',     time:'T+00:41:22' },
+    ];
+
+    function renderAlerts(){
+      const list = document.getElementById('alertList');
+      list.innerHTML='';
+      alertsData.forEach((a,i) => {
+        const div = document.createElement('div');
+        div.className=`alert-item alert-${a.type}`;
+        div.setAttribute('role','listitem');
+        div.setAttribute('tabindex','0');
+        div.setAttribute('aria-label',`${a.type.toUpperCase()} alert: ${a.title}, ${a.time}. Click to dismiss.`);
+        div.innerHTML=`<div class="alert-icon" aria-hidden="true">${a.icon}</div><div class="alert-body"><div class="alert-title">${a.title}</div><div class="alert-time">${a.time}</div></div>`;
+        const dismiss = () => { div.classList.toggle('dismissed'); updateAlertCount(); };
+        div.onclick = dismiss;
+        div.onkeydown = e => { if(e.key==='Enter'||e.key===' ') dismiss(); };
+        list.appendChild(div);
+      });
+      updateAlertCount();
+    }
+
+    function updateAlertCount(){
+      const total = document.querySelectorAll('.alert-item').length;
+      const dismissed = document.querySelectorAll('.alert-item.dismissed').length;
+      document.getElementById('alertCount').textContent = `${total-dismissed} ACTIVE`;
+    }
+    renderAlerts();
+
+    const newAlerts = [
+      { type:'info', icon:'◉', title:'Telemetry sync complete — all nodes nominal' },
+      { type:'warn', icon:'◈', title:'Fuel cell B-4 pressure fluctuation detected' },
+      { type:'ok',   icon:'✓', title:'Navigation waypoint WP-9 reached' },
+    ];
+    let alertIdx=0;
+    setInterval(()=>{
+      const a={...newAlerts[alertIdx%newAlerts.length]};
+      const now=new Date();
+      a.time=`T+00:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`;
+      alertsData.unshift(a);
+      if(alertsData.length>12) alertsData.pop();
+      renderAlerts();
+      alertIdx++;
+    },9000);
+
+    // ── KANBAN ──
+    let taskIdCounter=1000;
+    const tagMap={nav:'NAV',eng:'ENG',bio:'BIO',sec:'SEC'};
+    const tagClass={nav:'tag-nav',eng:'tag-eng',bio:'tag-bio',sec:'tag-sec'};
+    const tasks=[
+      [
+        {id:1001,title:'Recalibrate gyroscope array module',tag:'nav',pri:'high'},
+        {id:1002,title:'Inspect hull breach sensors in zone 4',tag:'sec',pri:'med'},
+        {id:1003,title:'Update star chart database v2.7',tag:'nav',pri:'low'},
+      ],
+      [
+        {id:1004,title:'Repair thruster 3 fuel injector',tag:'eng',pri:'high'},
+        {id:1005,title:'Crew health monitoring diagnostics',tag:'bio',pri:'med'},
+      ],
+      [
+        {id:1006,title:'Emergency protocol drill completed',tag:'sec',pri:'high'},
+        {id:1007,title:'O2 scrubber maintenance cycle done',tag:'bio',pri:'med'},
+      ],
+    ];
+
+    function renderKanban(){
+      [0,1,2].forEach(col=>{
+        const el=document.getElementById(`cards-${col}`);
+        el.innerHTML='';
+        tasks[col].forEach(t=>{
+          const wrapper=document.createElement('div');
+          wrapper.className=`pri-${t.pri}`;
+          wrapper.setAttribute('role','listitem');
+          const card=document.createElement('div');
+          card.className='task-card';
+          card.setAttribute('tabindex','0');
+          card.setAttribute('aria-label',`Task ${t.id}: ${t.title}, priority ${t.pri}`);
+          const nextLabel=['→ ACTIVATE','→ COMPLETE','→ ARCHIVE'][col];
+          const nextCol=col<2?col+1:null;
+          card.innerHTML=`
+            <div class="task-id">TASK-${t.id} · ${t.pri.toUpperCase()}</div>
+            <div class="task-title">${t.title}</div>
+            <div class="task-meta">
+              <span class="task-tag ${tagClass[t.tag]}">${tagMap[t.tag]}</span>
+              ${nextCol!==null?`<button class="task-move" aria-label="Move task ${t.id} to ${['Queued','In Progress','Complete'][nextCol]}">${nextLabel}</button>`:'<span style="font-size:0.58rem;color:var(--glow2)" aria-label="Task complete">✓ DONE</span>'}
+            </div>`;
+          if(nextCol!==null){
+            card.querySelector('.task-move').onclick=e=>{ e.stopPropagation(); moveTask(t.id,col,nextCol); };
+          }
+          wrapper.appendChild(card);
+          el.appendChild(wrapper);
+        });
+      });
+    }
+
+    function moveTask(id,fromCol,toCol){
+      const idx=tasks[fromCol].findIndex(t=>t.id===id);
+      if(idx===-1)return;
+      const [task]=tasks[fromCol].splice(idx,1);
+      tasks[toCol].push(task);
+      renderKanban();
+      termLog(`TASK-${id} → ${['QUEUED','IN PROGRESS','COMPLETE'][toCol]}`, 'ok');
+    }
+    renderKanban();
+
+    // Modal
+    let modalTargetCol=0;
+    function openModal(col){
+      modalTargetCol=col;
+      document.getElementById('taskTitle').value='';
+      const overlay=document.getElementById('modal');
+      overlay.classList.add('open');
+      overlay.removeAttribute('inert');
+      setTimeout(()=>document.getElementById('taskTitle').focus(),100);
+    }
+    function closeModal(){
+      document.getElementById('modal').classList.remove('open');
+    }
+    function addTask(){
+      const title=document.getElementById('taskTitle').value.trim();
+      if(!title)return;
+      taskIdCounter++;
+      tasks[modalTargetCol].push({id:taskIdCounter,title,tag:document.getElementById('taskTag').value,pri:document.getElementById('taskPri').value});
+      renderKanban();
+      closeModal();
+      termLog(`TASK-${taskIdCounter} deployed → ${['QUEUED','IN PROGRESS','COMPLETE'][modalTargetCol]}`, 'ok');
+    }
+    document.getElementById('modal').addEventListener('click', e=>{
+      if(e.target===document.getElementById('modal')) closeModal();
+    });
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+    document.getElementById('taskTitle').addEventListener('keydown', e=>{ if(e.key==='Enter') addTask(); });
+
+    // ── TERMINAL ──
+    function termLog(msg, type='sys'){
+      const out=document.getElementById('termOutput');
+      const span=document.createElement('span');
+      span.className=`t-line t-${type}`;
+      span.textContent=(type==='cmd'?'> ':'  ')+msg;
+      out.appendChild(span);
+      out.appendChild(document.createElement('br'));
+      out.scrollTop=out.scrollHeight;
+      while(out.children.length>30) out.removeChild(out.firstChild);
+    }
+
+    const commands = {
+      help:   ()=>{ termLog('COMMANDS: status · ping · scan · crew · fuel · clear · time','sys'); },
+      status: ()=>{ termLog(`SYS OK — ${systems.filter(s=>s.val>60).length}/${systems.length} nominal`,'ok'); },
+      ping:   ()=>{ termLog('PING: 24ms — EARTH-RELAY-7 ONLINE','ok'); },
+      scan:   ()=>{
+        termLog('PROXIMITY SCAN INITIATED…','sys');
+        setTimeout(()=>termLog('CONTACT α: NON-HOSTILE — 340km','ok'),400);
+        setTimeout(()=>termLog('CONTACT β: DEBRIS FIELD — 1,200km','sys'),800);
+        setTimeout(()=>termLog('CONTACT γ: BEACON SIGNAL — 4,800km','ok'),1200);
+      },
+      crew:   ()=>{ termLog('CREW STATUS: 7/7 NOMINAL — ALL VITALS GREEN','ok'); },
+      fuel:   ()=>{ termLog(`FUEL RESERVES: ${Math.round(metrics[3].val)}% — EST. 847h REMAINING`,'ok'); },
+      clear:  ()=>{ document.getElementById('termOutput').innerHTML=''; },
+      time:   ()=>{ termLog(`UTC ${new Date().toISOString().slice(11,19)} — MET T+${String(Math.floor(Math.random()*99)).padStart(2,'0')}d ${String(Math.floor(Math.random()*23)).padStart(2,'0')}h`,'ok'); },
+    };
+
+    const termHistory=[];
+    let historyIdx=-1;
+    document.getElementById('termInput').addEventListener('keydown', e=>{
+      if(e.key==='Enter'){
+        const raw=e.target.value.trim().toLowerCase();
+        e.target.value='';
+        historyIdx=-1;
+        if(!raw)return;
+        termHistory.unshift(raw);
+        if(termHistory.length>20) termHistory.pop();
+        termLog(raw,'cmd');
+        if(commands[raw]) commands[raw]();
+        else termLog(`UNKNOWN: "${raw}" — type "help" for commands`,'err');
+      } else if(e.key==='ArrowUp'){
+        e.preventDefault();
+        if(historyIdx<termHistory.length-1){ historyIdx++; e.target.value=termHistory[historyIdx]; }
+      } else if(e.key==='ArrowDown'){
+        e.preventDefault();
+        if(historyIdx>0){ historyIdx--; e.target.value=termHistory[historyIdx]; }
+        else { historyIdx=-1; e.target.value=''; }
+      }
+    });
+
+    // Boot sequence
+    const bootMsgs = [
+      ['MISSION CONTROL v2.4.1 ONLINE','ok',300],
+      ['SUBSYSTEMS INITIALIZED','ok',800],
+      ['TELEMETRY STREAM ACTIVE','ok',1300],
+      ['TYPE "help" FOR COMMANDS','sys',1800],
+    ];
+    bootMsgs.forEach(([msg,type,delay])=>setTimeout(()=>termLog(msg,type),delay));
+  </script>
+
+</body>
+</html>
